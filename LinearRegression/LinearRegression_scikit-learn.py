@@ -10,15 +10,16 @@ def linearRegression():
     X = np.array(data[:,0:-1],dtype=np.float64)      # X对应0到倒数第2列                  
     y = np.array(data[:,-1],dtype=np.float64)        # y对应最后一列  
         
-    # 归一化操作
+    # sklearn.preprocessing.StandardScaler 归一化操作 均值为0，标准差为1
     scaler = StandardScaler()   
-    scaler.fit(X)
+    scaler.fit(X) # scaler计算数据的均值和方差
+    # 数据标准归一化缩放
     x_train = scaler.transform(X)
-    x_test = scaler.transform(np.array([1650,3]))
+    x_test = scaler.transform(np.array([[2104,3]]))
     
     # 线性模型拟合
     model = linear_model.LinearRegression()
-    model.fit(x_train, y)
+    model.fit(x_train, y)   # 应该是对X第一列自动补1
     
     #预测结果
     result = model.predict(x_test)
